@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Inventory Agent</title>
+    <style>
+        body { font-family: sans-serif; max-width: 600px; margin: 40px auto; }
+        .msg { padding: 10px 14px; margin: 8px 0; border-radius: 10px; }
+        .user { background: #dceeff; text-align: right; }
+        .agent { background: #eee; }
+        form { display: flex; gap: 8px; margin-top: 20px; }
+        input[type=text] { flex: 1; padding: 10px; }
+        button { padding: 10px 16px; }
+    </style>
+</head>
+<body>
+
+<h2>Inventory Agent</h2>
+
+{% for message in history %}
+    <div class="msg {{ message.role }}">{{ message.text }}</div>
+{% endfor %}
+
+<form method="post">
+    {% csrf_token %}
+    <input type="text" name="message" placeholder="Ask about the inventory..." autofocus>
+    <button type="submit">Send</button>
+</form>
+
+<p><a href="{% url 'reset' %}">Start over</a></p>
+
+</body>
+</html>
